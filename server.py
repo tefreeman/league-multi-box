@@ -1,8 +1,13 @@
-#!/usr/bin/env python3
+import keyboard
+import time
+
+def pressAndRelease(key_str: str):
+    keyboard.press_and_release(key_str)
+
 
 import socket
 
-HOST = '192.168.1.7'  # Standard loopback interface address (localhost)
+HOST = '192.168.1.8'  # Standard loopback interface address (localhost)
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -15,4 +20,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             data = conn.recv(1024)
             if not data:
                 break
-            conn.sendall(data)
+            
+            str_msg = data.decode("utf-8")
+            
+            pressAndRelease(str_msg)
