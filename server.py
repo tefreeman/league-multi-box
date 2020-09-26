@@ -47,6 +47,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 break
             
             str_msg = data.decode("utf-8")
+            print(str_msg)
             eve, msg = str_msg.split('.')
             
             if eve == 'pr':
