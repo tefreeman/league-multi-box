@@ -26,6 +26,34 @@ class KeyToggle:
         return key_str in self.keys
     
     
+class KeyToggleGroup:
+    def __init__(self):
+        self.keys = {}
+        
+    def add_key(self, key_str: str):
+        if not self.has_key(key_str):
+            self.keys[key_str] = False
+    
+    def trigger_key(self, key_str: str):
+        self.add_key(key_str)
+        
+        if self.keys[key_str] is True:
+            keyboard.release(key_str)
+        else: 
+            self.release_all()
+            time.sleep(0.10)
+            keyboard.press(key_str)
+                
+        self.keys[key_str] = not self.keys[key_str]
+    
+    def release_all(self):
+        for key, value in self.keys.items():
+            if value:
+                self.trigger_key(key)
+                
+    def has_key(self, key_str: str):
+        return key_str in self.keys
+    
     
 
 import socket
@@ -37,7 +65,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, PORT))
     s.listen()
     conn, addr = s.accept()
-    key_toggle = KeyToggle()
+    key_toggle = KeyToggleGroup()
     
     with conn:
         print('Connected by', addr)
@@ -48,7 +76,14 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             
             str_msg = data.decode("utf-8")
             print(str_msg)
-            eve, msg = str_msg.split('.')
+            
+            str_arr = str_msg.split('.')
+            
+            if len(str_arr) == 2:
+                eve = str_arr[0]
+                msg = str_arr[1]
+            else:
+                break
             
             if eve == 'pr':
                 pressAndRelease(msg)
