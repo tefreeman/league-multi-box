@@ -104,19 +104,23 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                     
                     if eve == 'pr':
                         pressAndRelease(msg)
+                   
                     elif eve == 't':
                         key_toggle.trigger_key(msg)
+                   
                     elif eve == 'mm' and MOUSE_STATE is True:
                         x, y = msg.split(',')
                         x = int(x)
                         y = int(y)
                         mouse.move(x, y)
+                    
                     elif eve == 'mc':
                         if msg == 'left':
                             mouse.click(button='left')
                         elif msg == 'right':
                             mouse.click(button='right')
-                    elif eve == 's':
+                    
+                    elif eve == 'ms':
                         MOUSE_STATE = not MOUSE_STATE
             else:
                 print('break3')
