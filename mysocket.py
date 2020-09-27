@@ -69,10 +69,16 @@ keyboard.add_hotkey('shift+f4', TestSocket.mysend, args=['t','f4'])
 keyboard.add_hotkey('shift+f5', TestSocket.mysend, args=['t','f5'])
 
 
-
+prev_pos = (-1, -1)
 while 1:
     mouse_pos = mouse.get_position()
-    TestSocket.mysend('mm', str(mouse_pos[0]) + ',' + str(mouse_pos[1]))
+    
+    if mouse_pos[0] == prev_pos[0] and mouse_pos[1] == prev_pos[1]:
+        continue
+    else:
+        TestSocket.mysend('mm', str(mouse_pos[0]) + ',' + str(mouse_pos[1]))
+        prev_pos = (mouse_pos[0], mouse_pos[1])
+   
     time.sleep(0.05)
     
 keyboard.wait()
