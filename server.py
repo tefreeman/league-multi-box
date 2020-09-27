@@ -69,12 +69,14 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     
     with conn:
         print('Connected by', addr)
+        
         data_stream = ''
        
         while True:
             data = conn.recv(1024)
             
             if not data:
+                print('break1')
                 break
             
             data_stream += data.decode("utf-8")
@@ -85,12 +87,13 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 str_stream = data_stream.replace('~', '')    
                 data_stream = ''
                 
-                str_arr = data_stream.split('.')
+                str_arr = str_stream.split('.')
                 
                 if len(str_arr) == 2:
                     eve = str_arr[0]
                     msg = str_arr[1]
                 else:
+                    print('break2')
                     break
                 
                 if eve == 'pr':
@@ -103,4 +106,5 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                     y = int(y)
                     mouse.move(x, y)
             else:
+                print('break3')
                 break
