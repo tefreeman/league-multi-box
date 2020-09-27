@@ -62,7 +62,7 @@ class KeyToggleGroup:
 HOST = '192.168.1.7'  # Standard loopback interface address (localhost)
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 MOUSE_STATE = False
-
+CENTER_POS = (960,540)
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, PORT))
     s.listen()
@@ -121,7 +121,11 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                             mouse.click(button='right')
                     
                     elif eve == 'ms':
-                        MOUSE_STATE = not MOUSE_STATE
+                        if msg == 't':
+                            MOUSE_STATE = not MOUSE_STATE
+                        elif msg == 'c':
+                            mouse.move(CENTER_POS[0], CENTER_POS[1])
+                            MOUSE_STATE = False
             else:
                 print('break3')
                 break
