@@ -93,6 +93,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                     msg = str_arr[1]
                 else:
                     print('break2')
+                    print(str_stream)
                     break
                 
                 if eve == 'pr':
