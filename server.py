@@ -84,32 +84,37 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             
             
             if data_stream[0] == '~' and data_stream[-1:] == '~':
-                str_stream = data_stream.replace('~', '')    
-                data_stream = ''
-                str_arr = str_stream.split('.')
-                
-                if len(str_arr) == 2:
-                    eve = str_arr[0]
-                    msg = str_arr[1]
-                else:
-                    print('break2')
-                    print(str_stream)
-                    break
-                
-                if eve == 'pr':
-                    pressAndRelease(msg)
-                elif eve == 't':
-                    key_toggle.trigger_key(msg)
-                elif eve == 'mm':
-                    x, y = msg.split(',')
-                    x = int(x)
-                    y = int(y)
-                    mouse.move(x, y)
-                elif eve == 'mc':
-                    if msg == 'left':
-                        mouse.click(button='left')
-                    elif msg == 'right':
-                         mouse.click(button='right')
+                commands = data_stream.split('~')
+                for command_str in commands:
+                    
+                    if len(command_str) <= 1:
+                        continue
+                    
+                    data_stream = ''
+                    str_arr = command_str.split('.')
+                    
+                    if len(str_arr) == 2:
+                        eve = str_arr[0]
+                        msg = str_arr[1]
+                    else:
+                        print('break2')
+                        print(command_str)
+                        break
+                    
+                    if eve == 'pr':
+                        pressAndRelease(msg)
+                    elif eve == 't':
+                        key_toggle.trigger_key(msg)
+                    elif eve == 'mm':
+                        x, y = msg.split(',')
+                        x = int(x)
+                        y = int(y)
+                        mouse.move(x, y)
+                    elif eve == 'mc':
+                        if msg == 'left':
+                            mouse.click(button='left')
+                        elif msg == 'right':
+                            mouse.click(button='right')
             else:
                 print('break3')
                 break
