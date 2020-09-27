@@ -39,6 +39,7 @@ keyboard.add_hotkey('shift+q', TestSocket.mysend, args=['pr', 'q'])
 keyboard.add_hotkey('shift+w', TestSocket.mysend, args=['pr','w'])
 keyboard.add_hotkey('shift+e', TestSocket.mysend, args=['pr','e'])
 keyboard.add_hotkey('shift+r', TestSocket.mysend, args=['pr','r'])
+keyboard.add_hotkey('shift+b', TestSocket.mysend, args=['pr','b'])
 
 keyboard.add_hotkey('shift+y', TestSocket.mysend, args=['pr','y'])
 keyboard.add_hotkey('shift+p', TestSocket.mysend, args=['pr','p'])
