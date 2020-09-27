@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 import keyboard
+import mouse
 import socket
 import time
+
 HOST = '192.168.1.7'  # The server's hostname or IP address
 PORT = 65432        # The port used by the server
 
@@ -19,7 +21,7 @@ class MySocket:
         self.sock.connect((HOST, PORT))
 
     def mysend(self, eve: str, msg: str):
-        payload_bytes = str.encode(eve + '.' + msg)
+        payload_bytes = str.encode('~' + eve + '.' + msg + '~')
         sent = self.sock.send(payload_bytes)
         if sent == 0:
             raise RuntimeError("socket connection broken")
@@ -32,10 +34,15 @@ TestSocket.connect()
 
 time.sleep(1)
 
+
 keyboard.add_hotkey('shift+q', TestSocket.mysend, args=['pr', 'q'])
 keyboard.add_hotkey('shift+w', TestSocket.mysend, args=['pr','w'])
 keyboard.add_hotkey('shift+e', TestSocket.mysend, args=['pr','e'])
 keyboard.add_hotkey('shift+r', TestSocket.mysend, args=['pr','r'])
+
+keyboard.add_hotkey('shift+y', TestSocket.mysend, args=['pr','y'])
+keyboard.add_hotkey('shift+p', TestSocket.mysend, args=['pr','p'])
+
 
 keyboard.add_hotkey('shift+f', TestSocket.mysend, args=['pr','f'])
 keyboard.add_hotkey('shift+d', TestSocket.mysend, args=['pr','d'])
@@ -56,5 +63,12 @@ keyboard.add_hotkey('shift+f3', TestSocket.mysend, args=['t','f3'])
 keyboard.add_hotkey('shift+f4', TestSocket.mysend, args=['t','f4'])
 keyboard.add_hotkey('shift+f5', TestSocket.mysend, args=['t','f5'])
 
+
+
+#while 1:
+ #   mouse_pos = mouse.get_position()
+ #   TestSocket.mysend('mm', str(mouse_pos[0]) + ',' + str(mouse_pos[1]))
+ #  time.sleep(0.25)
+    
 keyboard.wait()
     

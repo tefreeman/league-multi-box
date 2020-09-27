@@ -69,23 +69,38 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     
     with conn:
         print('Connected by', addr)
+        data_stream = ''
+       
         while True:
             data = conn.recv(1024)
+            
             if not data:
                 break
             
-            str_msg = data.decode("utf-8")
-            print(str_msg)
+            data_stream += data.decode("utf-8")
             
-            str_arr = str_msg.split('.')
+            print(data_stream)
             
-            if len(str_arr) == 2:
-                eve = str_arr[0]
-                msg = str_arr[1]
+            if data_stream[0] == '~' and data_stream[-1:] == '~':
+                str_stream = data_stream.replace('~', '')    
+                data_stream = ''
+                
+                str_arr = data_stream.split('.')
+                
+                if len(str_arr) == 2:
+                    eve = str_arr[0]
+                    msg = str_arr[1]
+                else:
+                    break
+                
+                if eve == 'pr':
+                    pressAndRelease(msg)
+                elif eve == 't':
+                    key_toggle.trigger_key(msg)
+                elif eve == 'mm':
+                    x, y = msg.split(',')
+                    x = int(x)
+                    y = int(y)
+                    mouse.move(x, y)
             else:
                 break
-            
-            if eve == 'pr':
-                pressAndRelease(msg)
-            elif eve == 't':
-                key_toggle.trigger_key(msg)
