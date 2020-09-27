@@ -43,6 +43,7 @@ keyboard.add_hotkey('shift+r', TestSocket.mysend, args=['pr','r'])
 keyboard.add_hotkey('shift+y', TestSocket.mysend, args=['pr','y'])
 keyboard.add_hotkey('shift+p', TestSocket.mysend, args=['pr','p'])
 
+
 keyboard.add_hotkey('shift+z', TestSocket.mysend, args=['mc','left'])
 keyboard.add_hotkey('shift+x', TestSocket.mysend, args=['mc','right'])
 
@@ -68,6 +69,7 @@ keyboard.add_hotkey('shift+f2', TestSocket.mysend, args=['t','f2'])
 keyboard.add_hotkey('shift+f3', TestSocket.mysend, args=['t','f3'])
 keyboard.add_hotkey('shift+f4', TestSocket.mysend, args=['t','f4'])
 keyboard.add_hotkey('shift+f5', TestSocket.mysend, args=['t','f5'])
+keyboard.add_hotkey('shift+space', TestSocket.mysend, args=['tr',' '])
 
 
 prev_pos = (-1, -1)

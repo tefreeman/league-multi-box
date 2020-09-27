@@ -108,6 +108,9 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                    
                     elif eve == 't':
                         key_toggle.trigger_key(msg)
+                    
+                    elif eve == 'tr':
+                        key_toggle.release_all()
                    
                     elif eve == 'mm' and MOUSE_STATE is True:
                         x, y = msg.split(',')
