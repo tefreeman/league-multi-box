@@ -105,7 +105,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                     x, y = msg.split(',')
                     x = int(x)
                     y = int(y)
-                    mouse.move(x, y)
+                    mouse.move(x, y, duration=0.05)
             else:
                 print('break3')
                 break
