@@ -13,7 +13,8 @@ class MySocket:
     def __init__(self, sock=None):
         if sock is None:
             self.sock = socket.socket(
-                            socket.AF_INET, socket.SOCK_STREAM)
+                            socket.AF_INET, socket.SOCK_STREAM,)
+            self.sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
         else:
             self.sock = sock
 

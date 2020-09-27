@@ -109,7 +109,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                     elif eve == 'c':
                         MOUSE_STATE = False
                         key_toggle.release_all()
-                        mouse.move(CENTER_POS[0]+ 180, CENTER_POS[1] + 180)
+                        mouse.move(60, 980)
                         key_toggle.trigger_key(msg)
                         time.sleep(0.05)
                         pressAndRelease('w')
