@@ -65,10 +65,10 @@ keyboard.add_hotkey('shift+f5', TestSocket.mysend, args=['t','f5'])
 
 
 
-#while 1:
- #   mouse_pos = mouse.get_position()
- #   TestSocket.mysend('mm', str(mouse_pos[0]) + ',' + str(mouse_pos[1]))
- #  time.sleep(0.25)
+while 1:
+    mouse_pos = mouse.get_position()
+    TestSocket.mysend('mm', str(mouse_pos[0]) + ',' + str(mouse_pos[1]))
+    time.sleep(0.25)
     
 keyboard.wait()
     

@@ -1,5 +1,6 @@
 import keyboard
 import time
+import mouse
 
 def pressAndRelease(key_str: str):
     keyboard.press_and_release(key_str)
