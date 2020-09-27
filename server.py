@@ -93,7 +93,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                     
                     data_stream = ''
                     str_arr = command_str.split('.')
-                    
+                    print(str_arr)
                     if len(str_arr) == 2:
                         eve = str_arr[0]
                         msg = str_arr[1]
