@@ -65,11 +65,11 @@ keyboard.add_hotkey('alt+w', TestSocket.mysend, args=['pr','ctrl+w'])
 keyboard.add_hotkey('alt+e', TestSocket.mysend, args=['pr','ctrl+e'])
 keyboard.add_hotkey('alt+r', TestSocket.mysend, args=['pr','ctrl+r'])
 
-keyboard.add_hotkey('shift+f1', TestSocket.mysend, args=['t','f1'])
-keyboard.add_hotkey('shift+f2', TestSocket.mysend, args=['t','f2'])
-keyboard.add_hotkey('shift+f3', TestSocket.mysend, args=['t','f3'])
-keyboard.add_hotkey('shift+f4', TestSocket.mysend, args=['t','f4'])
-keyboard.add_hotkey('shift+f5', TestSocket.mysend, args=['t','f5'])
+keyboard.add_hotkey('shift+f1', TestSocket.mysend, args=['c','f1'])
+keyboard.add_hotkey('shift+f2', TestSocket.mysend, args=['c','f2'])
+keyboard.add_hotkey('shift+f3', TestSocket.mysend, args=['c','f3'])
+keyboard.add_hotkey('shift+f4', TestSocket.mysend, args=['c','f4'])
+keyboard.add_hotkey('shift+f5', TestSocket.mysend, args=['c','f5'])
 keyboard.add_hotkey('shift+space', TestSocket.mysend, args=['tr',' '])
 
 

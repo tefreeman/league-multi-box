@@ -106,12 +106,17 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                     if eve == 'pr':
                         pressAndRelease(msg)
                    
-                    elif eve == 't':
-                        key_toggle.trigger_key(msg)
-                    
-                    elif eve == 'tr':
+                    elif eve == 'c':
+                        MOUSE_STATE = False
                         key_toggle.release_all()
-                   
+                        mouse.move(CENTER_POS[0]+ 180, CENTER_POS[1] + 180)
+                        key_toggle.trigger_key(msg)
+                        time.sleep(0.05)
+                        pressAndRelease('w')
+                        mouse.move(CENTER_POS[0], CENTER_POS[1])
+                        pressAndRelease('w')
+                        MOUSE_STATE = True
+                                    
                     elif eve == 'mm' and MOUSE_STATE is True:
                         x, y = msg.split(',')
                         x = int(x)
