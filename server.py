@@ -113,6 +113,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                         mouse.move(60, 980)
                         time.sleep(0.05)
                         pressAndRelease('w')
+                        time.sleep(0.05)
                         mouse.move(CENTER_POS[0], CENTER_POS[1])
                         time.sleep(0.05)
                         pressAndRelease('w')
