@@ -1,6 +1,8 @@
 import keyboard
 import time
 import mouse
+import socket
+
 
 def pressAndRelease(key_str: str):
     keyboard.press_and_release(key_str)
@@ -57,8 +59,6 @@ class KeyToggleGroup:
     
     
 
-import socket
-
 HOST = '192.168.1.7'  # Standard loopback interface address (localhost)
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 
@@ -82,12 +82,10 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             
             data_stream += data.decode("utf-8")
             
-            print(data_stream)
             
             if data_stream[0] == '~' and data_stream[-1:] == '~':
                 str_stream = data_stream.replace('~', '')    
                 data_stream = ''
-                
                 str_arr = str_stream.split('.')
                 
                 if len(str_arr) == 2:
@@ -106,6 +104,11 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                     x = int(x)
                     y = int(y)
                     mouse.move(x, y)
+                elif eve == 'mc':
+                    if msg == 'left':
+                        mouse.click(button='left')
+                    elif msg == 'right':
+                         mouse.click(button='right')
             else:
                 print('break3')
                 break
