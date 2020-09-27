@@ -84,7 +84,7 @@ while 1:
         TestSocket.mysend('mm', str(mouse_pos[0]) + ',' + str(mouse_pos[1]))
         prev_pos = (mouse_pos[0], mouse_pos[1])
    
-    time.sleep(0.05)
+    time.sleep(0.02)
     
 keyboard.wait()
     
