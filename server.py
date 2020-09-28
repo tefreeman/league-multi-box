@@ -112,14 +112,13 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                         
                         key_toggle.release_all()
                         key_toggle.trigger_key(msg)
-                        
-                        mouse.move(CENTER_POS[0], CENTER_POS[1])                   
+                                       
                         mouse.move(60, 980)
-                        time.sleep(0.05)
+                        time.sleep(0.07)
                         pressAndRelease('w')
-                        time.sleep(0.05)
-                        mouse.move(CENTER_POS[0], CENTER_POS[1])
-                        time.sleep(0.35)
+                        time.sleep(0.06)
+                        mouse.move(CENTER_POS[0], CENTER_POS[1] - 20)
+                        time.sleep(0.38)
                         pressAndRelease('w')
                         
                         if old_mouse_state is True:
@@ -145,6 +144,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                         elif msg == 'c':
                             mouse.move(CENTER_POS[0], CENTER_POS[1])
                             MOUSE_STATE = False
+                    
             else:
                 print('break3')
                 break
