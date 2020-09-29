@@ -3,7 +3,7 @@ import time
 import mouse
 import socket
 from actions import Actions
-
+from screen_reader import ScreenReader
 def pressAndRelease(key_str: str):
     keyboard.press_and_release(key_str)
 
@@ -63,7 +63,8 @@ HOST = '192.168.1.7'  # Standard loopback interface address (localhost)
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 MOUSE_STATE = False
 CENTER_POS = (960,540)
-
+AUTO_HEAL_STATE = False
+screen_reader = ScreenReader()
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, PORT))
     s.listen()
@@ -109,6 +110,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                    
                     elif eve == 'c':
                         Actions.switch_champions(msg)                                    
+                    
                     elif eve == 'mm' and MOUSE_STATE is True:
                         x, y = msg.split(',')
                         x = int(x)
@@ -128,6 +130,14 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                             mouse.move(CENTER_POS[0], CENTER_POS[1])
                             MOUSE_STATE = False
                     
+                    elif eve == 'ah':
+                        if AUTO_HEAL_STATE:
+                            screen_reader.stop()
+                            AUTO_HEAL_STATE = False
+                            screen_reader = ScreenReader()
+                        else:
+                            screen_reader.start()
+                            AUTO_HEAL_STATE = True
             else:
                 print('break3')
                 break
