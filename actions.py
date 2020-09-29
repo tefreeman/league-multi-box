@@ -19,10 +19,13 @@ class Actions:
         time.sleep(0.03)
         Actions.press_and_release_key('w')
         time.sleep(0.12)
-        Actions.press_and_release_key(key)
+        keyboard.press(key)
         mouse.move(Actions.CENTER_POS[0], Actions.CENTER_POS[1] - 50)
         time.sleep(0.4)
         Actions.press_and_release_key('w')
+        time.sleep(0.1)
+        keyboard.release(key)
+        
         
     @staticmethod
     def proc_passive():
