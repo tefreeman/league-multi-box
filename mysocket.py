@@ -72,7 +72,7 @@ keyboard.add_hotkey('shift+f4', TestSocket.mysend, args=['c','f4'])
 keyboard.add_hotkey('shift+f5', TestSocket.mysend, args=['c','f5'])
 keyboard.add_hotkey('shift+space', TestSocket.mysend, args=['tr',' '])
 
-keyboard.add_hotkey('shift+alt+w', TestSocket.mysend, args=['ah',' '])
+keyboard.add_hotkey('shift+alt+e', TestSocket.mysend, args=['ah',' '])
 
 
 prev_pos = (-1, -1)

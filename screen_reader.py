@@ -4,6 +4,7 @@ from threading import Thread
 import numpy as np
 import time
 from actions import Actions
+
 class ScreenReader(Thread):
     def __init__(self):
         Thread.__init__(self)
@@ -24,7 +25,7 @@ class ScreenReader(Thread):
                 val = 0
                 steps = 1015 - 920
                 for i in range(920, 1015):
-                    if img.getpixel((i, 378))[2] > 60:
+                    if img.getpixel((i, 378))[2] > 150 and img.getpixel((i, 378))[0] < 50:
                         val += 1
                 hp = val / steps
                 

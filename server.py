@@ -132,10 +132,12 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                     
                     elif eve == 'ah':
                         if AUTO_HEAL_STATE:
+                            print('auto heal off')
                             screen_reader.stop()
                             AUTO_HEAL_STATE = False
                             screen_reader = ScreenReader()
                         else:
+                            print('auto heal on')
                             screen_reader.start()
                             AUTO_HEAL_STATE = True
             else:
