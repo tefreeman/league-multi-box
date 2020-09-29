@@ -29,7 +29,7 @@ class ScreenReader(Thread):
                         val += 1
                 hp = val / steps
                 
-                if hp > 0.01 and hp < 50:
+                if hp > 0.01 and hp < 0.50:
                     Actions.press_and_release_key('e')
                 time.sleep(0.35)
                 print(hp)
