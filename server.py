@@ -2,7 +2,7 @@ import keyboard
 import time
 import mouse
 import socket
-
+from actions import Actions
 
 def pressAndRelease(key_str: str):
     keyboard.press_and_release(key_str)
@@ -63,6 +63,7 @@ HOST = '192.168.1.7'  # Standard loopback interface address (localhost)
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 MOUSE_STATE = False
 CENTER_POS = (960,540)
+
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, PORT))
     s.listen()
@@ -107,25 +108,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                         pressAndRelease(msg)
                    
                     elif eve == 'c':
-                        old_mouse_state = MOUSE_STATE
-                        MOUSE_STATE = False
-                        
-                        key_toggle.release_all()
-                        key_toggle.trigger_key(msg)
-                                       
-                        mouse.move(60, 980)
-                        time.sleep(0.07)
-                        pressAndRelease('w')
-                        time.sleep(0.06)
-                        mouse.move(CENTER_POS[0], CENTER_POS[1] - 20)
-                        time.sleep(0.38)
-                        pressAndRelease('w')
-                        
-                        if old_mouse_state is True:
-                            MOUSE_STATE = True
-                            
-                        key_toggle.release_all()
-                                    
+                        Actions.switch_champions(msg)                                    
                     elif eve == 'mm' and MOUSE_STATE is True:
                         x, y = msg.split(',')
                         x = int(x)
