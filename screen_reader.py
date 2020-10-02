@@ -6,8 +6,9 @@ import time
 from actions import Actions
 
 class ScreenReader(Thread):
-    def __init__(self):
+    def __init__(self, game_state):
         Thread.__init__(self)
+        self.game_state = game_state
         self.running = True
         
     def run(self):
@@ -18,22 +19,12 @@ class ScreenReader(Thread):
             while self.running:
                 sct_img = sct.grab(monitor)
                 img = Image.frombytes('RGB', sct_img.size, sct_img.bgra, 'raw', 'BGRX')
-                
-                #print(img.getpixel((920, 380)))
-                #print(img.getpixel((1015, 380)))
-
-                val = 0
-                steps = 1015 - 920
-                for i in range(920, 1015):
-                    if img.getpixel((i, 378))[2] > 150 and img.getpixel((i, 378))[0] < 50:
-                        val += 1
-                hp = val / steps
-                
-                if hp > 0.02 and hp < 0.50:
-                    Actions.press_and_release_key('e')
+                self.game_state.update(img)
                 time.sleep(0.35)
-                print(hp)
-    
+
+    def toggle_auto_heal(self):
+        self.game_state.toggle_auto_heal()
+        
     def stop(self):
         self.running = False
     

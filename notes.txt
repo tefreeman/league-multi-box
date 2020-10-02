@@ -1,0 +1,10 @@
+HP BARS
+    hp bars-y: 747
+    x-width: 52
+    top-x: 12 
+    jg-x:  83
+    mid-x: 156
+    adc-x: 228
+
+DEATH BAR ME
+    (318, 747) width 20
