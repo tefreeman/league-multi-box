@@ -88,4 +88,4 @@ class GameState:
                 hp = 0
             
             player.set_hp(hp)
-            player.print_hp()      
+            #player.print_hp()      
