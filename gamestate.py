@@ -23,6 +23,10 @@ class GameState:
             if self.players[self.attach_target].get_hp() < 0.60:
                 Actions.press_and_release_key('e')
                 
+            elif self.players[self.attach_target].get_hp() < 0.15:
+                Actions.press_and_release_key('d')
+                
+                
     def set_attach_taret(self, pos_str):
         self.attach_target = pos_str
     
@@ -88,4 +92,4 @@ class GameState:
                 hp = 0
             
             player.set_hp(hp)
-            #player.print_hp()      
+            player.print_hp()      
