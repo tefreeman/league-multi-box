@@ -60,7 +60,7 @@ class GameState:
         avg_green = avg_green / w
         avg_blue = avg_blue / w
         
-        if avg_blue / avg_red > 3 and avg_blue > 150 and avg_green > 100 and avg_red < 50:
+        if avg_blue / (avg_red+0.01) > 3 and avg_blue > 150 and avg_green > 100 and avg_red < 50:
             self._is_attached = True
         else:
             self._is_attached = False
