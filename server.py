@@ -145,6 +145,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                     
                     elif eve == 'ah':
                         screen_reader.toggle_auto_heal()
+                        print('toggle auto heal')
             else:
                 print('break3')
                 break

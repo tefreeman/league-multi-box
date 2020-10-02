@@ -42,6 +42,8 @@ class GameState:
         self.u_yummi_attached()
         self.auto_heal()
         
+        print('attach taret ', self.attach_target, ' is attached ', self._is_attached, ' auto heal enabled ', self.auto_heal_enabled)
+        
     def test_update(self):
         im = Image.open("pics/yummi_not_attached.png")
         self.update(im)
@@ -92,4 +94,4 @@ class GameState:
                 hp = 0
             
             player.set_hp(hp)
-            player.print_hp()      
+            #player.print_hp()      
