@@ -67,7 +67,7 @@ CENTER_POS = (960,540)
 AUTO_HEAL_STATE = False
 game_state = GameState()
 screen_reader = ScreenReader(game_state)
-
+screen_reader.start()
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, PORT))
     s.listen()
@@ -78,7 +78,6 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         print('Connected by', addr)
         
         data_stream = ''
-        screen_reader.run()
         while True:
             data = conn.recv(1024)
             

@@ -8,7 +8,7 @@ from actions import Actions
 class ScreenReader(Thread):
     def __init__(self, game_state):
         Thread.__init__(self)
-        #self.game_state = game_state
+        self.game_state = game_state
         self.running = True
         
     def run(self):
