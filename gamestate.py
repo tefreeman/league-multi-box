@@ -15,7 +15,7 @@ class GameState:
         }
         
         self._is_attached = False
-        self.attach_target = ''
+        self.attach_target = 'f2'
         self.auto_heal_enabled = False
     
     def auto_heal(self):
