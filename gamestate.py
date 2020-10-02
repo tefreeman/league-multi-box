@@ -15,11 +15,11 @@ class GameState:
         }
         
         self._is_attached = False
-        self.attach_target = None
+        self.attach_target = ''
         self.auto_heal_enabled = False
     
     def auto_heal(self):
-        if self._is_attached is True and self.attach_target is not None and self.auto_heal_enabled is True:
+        if self._is_attached is True and self.attach_target is not '' and self.auto_heal_enabled is True:
             if self.players[self.attach_target].get_hp() < 0.60:
                 Actions.press_and_release_key('e')
                 
