@@ -113,7 +113,18 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                         pressAndRelease(msg)
                    
                     elif eve == 'c':
-                        Actions.switch_champions(msg)                                    
+                        Actions.switch_champions(msg)
+                        target = ''
+                        if msg == 'f1':
+                            target = 'top'
+                        elif msg == 'f2':
+                            target = 'jg'
+                        elif msg == 'f3':
+                            target = 'mid'
+                        elif msg == 'f4':
+                            target = 'adc'
+                        
+                        game_state.attach_target(target)                                
                     
                     elif eve == 'mm' and MOUSE_STATE is True:
                         x, y = msg.split(',')
