@@ -4,11 +4,12 @@ from threading import Thread
 import numpy as np
 import time
 from actions import Actions
+from gamestate import GameState
 
 class ScreenReader(Thread):
     def __init__(self, game_state):
         Thread.__init__(self)
-        self.game_state = game_state
+        #self.game_state = game_state
         self.running = True
         
     def run(self):
@@ -19,7 +20,7 @@ class ScreenReader(Thread):
             while self.running:
                 sct_img = sct.grab(monitor)
                 img = Image.frombytes('RGB', sct_img.size, sct_img.bgra, 'raw', 'BGRX')
-                self.game_state.update(img)
+                #self.game_state.update(img)
                 time.sleep(0.35)
 
     def toggle_auto_heal(self):
