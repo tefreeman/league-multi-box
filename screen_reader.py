@@ -4,7 +4,6 @@ from threading import Thread
 import numpy as np
 import time
 from actions import Actions
-from gamestate import GameState
 
 class ScreenReader(Thread):
     def __init__(self, game_state):
