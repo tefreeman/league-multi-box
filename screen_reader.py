@@ -24,6 +24,7 @@ class ScreenReader(Thread):
 
     def toggle_auto_heal(self):
         self.game_state.toggle_auto_heal()
+
         
     def stop(self):
         self.running = False

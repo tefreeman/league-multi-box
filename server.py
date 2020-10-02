@@ -122,7 +122,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                         elif msg == 'f4':
                             target = 'adc'
                         
-                        game_state.attach_target(target)                                
+                        game_state.set_attach_target(target)                                
                     
                     elif eve == 'mm' and MOUSE_STATE is True:
                         x, y = msg.split(',')
