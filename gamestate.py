@@ -27,7 +27,7 @@ class GameState:
                 Actions.press_and_release_key('d')
                 
                 
-    def set_attach_taret(self, pos_str):
+    def set_attach_target(self, pos_str):
         self.attach_target = pos_str
     
     def get_player(self, pos_str):
