@@ -15,11 +15,12 @@ class GameState:
         }
         
         self._is_attached = False
-        self.attach_target = 'f2'
+        self.attach_target = ''
         self.auto_heal_enabled = False
     
     def auto_heal(self):
         if self._is_attached is True and self.attach_target is not '' and self.auto_heal_enabled is True:
+            print('auto heal firing')
             if self.players[self.attach_target].get_hp() < 0.60:
                 Actions.press_and_release_key('e')
                 
@@ -42,7 +43,6 @@ class GameState:
         self.u_yummi_attached()
         self.auto_heal()
         
-        print('attach taret ', self.attach_target, ' is attached ', self._is_attached, ' auto heal enabled ', self.auto_heal_enabled)
         
     def test_update(self):
         im = Image.open("pics/yummi_not_attached.png")
