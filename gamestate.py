@@ -3,6 +3,19 @@ from graphics_pos import graphics_pos
 from screen_reader import ScreenReader
 from PIL import Image
 from actions import Actions
+
+
+def fuzzy_match(input_c, output_c, max_color_dif = 10, min_color_diff = -10):
+    if (input_c[0] - output_c[0]) > max_color_dif or (input_c[0] - output_c[0]) < min_color_diff:
+        return False
+    if (input_c[1] - output_c[1]) > max_color_dif or (input_c[1] - output_c[1]) < min_color_diff:
+        return False
+    if (input_c[2] - output_c[2]) > max_color_dif or (input_c[2] - output_c[2]) < min_color_diff:
+        return False
+    
+    return True
+        
+    
 class GameState:
     def __init__(self):
 
@@ -48,31 +61,14 @@ class GameState:
         
         
     def test_update(self):
-        im = Image.open("pics/yummi_not_attached.png")
+        im = Image.open("C:/Users/Trevor/Documents/pics/yumim_attached.png")
         self.update(im)
     
     def u_yummi_attached(self):
-        x = graphics_pos['center_hp_player_bar']['x']
-        y = graphics_pos['center_hp_player_bar']['y']
-        w = graphics_pos['center_hp_player_bar']['width']
+        print(self.img.getpixel((900, 357)))
+        print(self.img.getpixel((891, 355)))
         
-        avg_red = 0
-        avg_green = 0
-        avg_blue = 0
-        
-        for i in range(x, x + w):
-            avg_red += self.img.getpixel((i, y))[0]
-            avg_green += self.img.getpixel((i, y))[1]
-            avg_blue += self.img.getpixel((i, y))[2]
-        
-        avg_red = avg_red / w
-        avg_green = avg_green / w
-        avg_blue = avg_blue / w
-        print((avg_blue / (avg_red+0.01)), '|', avg_blue, '|',  avg_green, '|', avg_red  )
-        if avg_blue / (avg_red+0.01) > 3 and avg_blue > 150 and avg_green > 100 and avg_red < 50:
-            self._is_attached = True
-        else:
-            self._is_attached = False
+        self._is_attached = fuzzy_match(self.img.getpixel((900, 357)), (115, 109, 247)) and fuzzy_match(self.img.getpixel((891, 355)), (239, 203, 99))
         
             
     def u_player_hp(self):
@@ -98,3 +94,5 @@ class GameState:
             
             player.set_hp(hp)
             player.print_hp()      
+
+
