@@ -11,7 +11,7 @@ graphics_pos = {
     },
     'center_hp_player_bar': {
         'x': 918,
-        'y': 377,
+        'y': 364,
         'width': 100
     }
 }
