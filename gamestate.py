@@ -19,6 +19,7 @@ class GameState:
         self.auto_heal_enabled = False
     
     def auto_heal(self):
+        print( self._is_attached, ' ', self.attach_targe, ' ', self.auto_heal_enabled )
         if self._is_attached is True and self.attach_target is not '' and self.auto_heal_enabled is True:
             print('auto heal firing')
             if self.players[self.attach_target].get_hp() < 0.60:
