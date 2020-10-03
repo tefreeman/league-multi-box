@@ -105,7 +105,3 @@ class GameState:
             
             player.set_hp(hp)
             player.print_hp()      
-
-
-gs = GameState()
-gs.test_update()
