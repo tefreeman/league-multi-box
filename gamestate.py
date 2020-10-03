@@ -65,8 +65,8 @@ class GameState:
         self.update(im)
     
     def u_yummi_attached(self):
-        print(self.img.getpixel((900, 357)))
-        print(self.img.getpixel((891, 355)))
+        #print(self.img.getpixel((900, 357)))
+        #print(self.img.getpixel((891, 355)))
         
         connected = False
         connected_2 = False

@@ -20,7 +20,7 @@ class ScreenReader(Thread):
                 sct_img = sct.grab(monitor)
                 img = Image.frombytes('RGB', sct_img.size, sct_img.bgra, 'raw', 'BGRX')
                 self.game_state.update(img)
-                time.sleep(1)
+                time.sleep(0.25)
 
     def toggle_auto_heal(self):
         self.game_state.toggle_auto_heal()
