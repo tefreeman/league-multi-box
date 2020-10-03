@@ -5,7 +5,7 @@ from PIL import Image
 from actions import Actions
 
 
-def fuzzy_match(input_c, output_c, max_color_dif = 10, min_color_diff = -10):
+def fuzzy_match(input_c, output_c, max_color_dif = 5, min_color_diff = -5):
     if (input_c[0] - output_c[0]) > max_color_dif or (input_c[0] - output_c[0]) < min_color_diff:
         return False
     if (input_c[1] - output_c[1]) > max_color_dif or (input_c[1] - output_c[1]) < min_color_diff:
@@ -61,15 +61,26 @@ class GameState:
         
         
     def test_update(self):
-        im = Image.open("C:/Users/Trevor/Documents/pics/yumim_attached.png")
+        im = Image.open("C:/Users/Trevor/Documents/pics/yummi_not_attached.png")
         self.update(im)
     
     def u_yummi_attached(self):
         print(self.img.getpixel((900, 357)))
         print(self.img.getpixel((891, 355)))
         
-        self._is_attached = fuzzy_match(self.img.getpixel((900, 357)), (115, 109, 247)) and fuzzy_match(self.img.getpixel((891, 355)), (239, 203, 99))
+        connected = False
+        connected_2 = False
+        for i in range(330, 420):
+            if fuzzy_match(self.img.getpixel((900, i)), (115, 109, 247)):
+                connected = True
+            if fuzzy_match(self.img.getpixel((891, i)), (239, 203, 99)):
+                connected_2 = True
         
+        if connected and connected_2:
+            self._is_attached = True
+        else:
+            self._is_attached = False
+            
             
     def u_player_hp(self):
         for player in self.players.values():
@@ -96,3 +107,5 @@ class GameState:
             player.print_hp()      
 
 
+gs = GameState()
+gs.test_update()
