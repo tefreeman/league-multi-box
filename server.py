@@ -67,7 +67,9 @@ CENTER_POS = (960,540)
 AUTO_HEAL_STATE = False
 game_state = GameState()
 screen_reader = ScreenReader(game_state)
+screen_reader.daemon = True
 screen_reader.start()
+
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, PORT))
     s.listen()
