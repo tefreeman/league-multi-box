@@ -22,9 +22,11 @@ class GameState:
         if self._is_attached is True and self.attach_target is not '' and self.auto_heal_enabled is True:
             print('auto heal firing')
             if self.players[self.attach_target].get_hp() < 0.60:
+                print('heal cast')
                 Actions.press_and_release_key('e')
                 
-            elif self.players[self.attach_target].get_hp() < 0.15:
+            if self.players[self.attach_target].get_hp() < 0.15:
+                print('summoenr heal')
                 Actions.press_and_release_key('d')
                 
                 
@@ -94,4 +96,4 @@ class GameState:
                 hp = 0
             
             player.set_hp(hp)
-            #player.print_hp()      
+            player.print_hp()      
