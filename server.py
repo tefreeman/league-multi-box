@@ -60,7 +60,7 @@ class KeyToggleGroup:
     
     
 
-HOST = '192.168.1.7'  # Standard loopback interface address (localhost)
+HOST = '192.168.1.10'  # Standard loopback interface address (localhost)
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 MOUSE_STATE = False
 CENTER_POS = (960,540)

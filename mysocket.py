@@ -4,7 +4,7 @@ import mouse
 import socket
 import time
 
-HOST = '192.168.1.7'  # The server's hostname or IP address
+HOST = '192.168.1.10'  # The server's hostname or IP address
 PORT = 65432        # The port used by the server
 
 
