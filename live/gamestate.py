@@ -3,9 +3,19 @@ from graphics_pos import graphics_pos
 from screen_reader import ScreenReader
 from PIL import Image
 from actions import Actions
-from utility import UtilityFuncs
 
+
+def fuzzy_match(input_c, output_c, max_color_dif = 5, min_color_diff = -5):
+    if (input_c[0] - output_c[0]) > max_color_dif or (input_c[0] - output_c[0]) < min_color_diff:
+        return False
+    if (input_c[1] - output_c[1]) > max_color_dif or (input_c[1] - output_c[1]) < min_color_diff:
+        return False
+    if (input_c[2] - output_c[2]) > max_color_dif or (input_c[2] - output_c[2]) < min_color_diff:
+        return False
+    
+    return True
         
+    
 class GameState:
     def __init__(self):
 
@@ -61,9 +71,9 @@ class GameState:
         connected = False
         connected_2 = False
         for i in range(330, 420):
-            if UtilityFuncs.fuzzy_color_match(self.img.getpixel((900, i)), (115, 109, 247)):
+            if fuzzy_match(self.img.getpixel((900, i)), (115, 109, 247)):
                 connected = True
-            if UtilityFuncs.fuzzy_color_match(self.img.getpixel((891, i)), (239, 203, 99)):
+            if fuzzy_match(self.img.getpixel((891, i)), (239, 203, 99)):
                 connected_2 = True
         
         if connected and connected_2:

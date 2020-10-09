@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# League
+patch_notes
 # C extensions
 *.so
 
