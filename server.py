@@ -108,10 +108,11 @@ def auto_heal(gs, changes, gameState, l):
             
 
 def listen_attached_player_death(gs, changes, gameState, l):
-    if gs['is_attached'] is False and gs['players'][gs['attach_target']]['is_alive'] is False and changes['is_attached'] is True and changes['players'][gs['attach_target']]['is_alive'] is True:
-        Actions.move_click(gameState.nexus_pos)
-        GameLoop.old_time = time.time()
-        return 'flee'
+    if gs['attach_target'] is not '':
+        if gs['is_attached'] is False and gs['players'][gs['attach_target']]['is_alive'] is False and changes['is_attached'] is True and changes['players'][gs['attach_target']]['is_alive'] is True:
+            Actions.move_click(gameState.nexus_pos)
+            GameLoop.old_time = time.time()
+            return 'flee'
     
 def listen_player_attach_changes(gs, changes, gameState, l):
     if changes['attach_target'] is True:
