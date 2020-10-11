@@ -50,14 +50,14 @@ class UtilityFuncs:
     @staticmethod
     def _inner_dict_keys_to_set(d: Dict, keys: Set, i: str = ""):
         for k, v in d.items():
+            n = i
             if isinstance(v, dict):
                 if len(i) > 0:
-                    i += "." + k
+                    n += "." + k
                 else:
-                    i += k
-                UtilityFuncs._inner_dict_keys_to_set(v, keys, i)
+                    n += k
+                UtilityFuncs._inner_dict_keys_to_set(v, keys, n)
             else:
-                n = i
                 if len(n) > 0:
                     n += "." + k
                 else:

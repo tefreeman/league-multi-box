@@ -23,7 +23,6 @@ class GameState:
     
     def to_dict(self):
         return {
-            'img': self.img,
             'players': {
                 'top': self.players['top'].to_dict(),
                 'jg': self.players['jg'].to_dict(),
