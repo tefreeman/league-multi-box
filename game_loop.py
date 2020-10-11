@@ -5,7 +5,7 @@ class GameLoop:
     
     old_time = 0
     state = ''
-    commands: {
+    commands = {
         'init': []
     }
     
