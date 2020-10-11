@@ -63,7 +63,7 @@ class KeyToggleGroup:
 
 def flee_back(gs, changes, gameState, l):
     print(time.time() - GameLoop.old_time)
-    if time.time() - GameLoop.old_time > 12:
+    if time.time() - GameLoop.old_time > 12 and time.time() - GameLoop.old_time < 18:
         Actions.press_and_release_key('b')
     
     elif time.time() - GameLoop.old_time > 18:
