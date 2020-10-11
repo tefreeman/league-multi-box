@@ -19,7 +19,12 @@ class Actions:
         mouse.move(mov_coords[0], mov_coords[1])
         time.sleep(0.05)
         mouse.click(button='right')
-    
+        mouse.move(mov_coords[0], mov_coords[1])
+        time.sleep(0.01)
+        mouse.click(button='right')
+        mouse.move(mov_coords[0], mov_coords[1])
+        time.sleep(0.03)
+        mouse.click(button='right')
         
     @staticmethod
     def switch_champions(key: str):
