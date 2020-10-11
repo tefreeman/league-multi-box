@@ -34,10 +34,6 @@ class GameLoop:
             
         GameLoop.listeners[state].append((func,))         
         GameLoop.commands[state].append(func)
-    
-    @staticmethod
-    def add_init_commands(func):
-        GameLoop.commands['init'].append(func)
 
     @staticmethod
     def run_commands(GameState):

@@ -124,7 +124,7 @@ CENTER_POS = (960,540)
 AUTO_HEAL_STATE = False
 game_state = GameState()
 
-GameLoop.add_init_commands(init_nexus_pos)
+GameLoop.add_command(init_nexus_pos, 'init')
 GameLoop.add_command(auto_heal, 'play')
 GameLoop.add_command(flee_back, 'flee')
 
