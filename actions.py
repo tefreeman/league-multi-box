@@ -18,7 +18,7 @@ class Actions:
     def move_click(mov_coords):
         mouse.move(mov_coords[0], mov_coords[1])
         time.sleep(0.05)
-        mouse.click()
+        mouse.click(button='right')
     
         
     @staticmethod
