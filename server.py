@@ -63,10 +63,13 @@ class KeyToggleGroup:
 
 def flee_back(gs, changes, gameState, l):
     print(time.time() - GameLoop.old_time)
+    
+    if time.time() - GameLoop.old_time < 11.5:
+        Actions.press_and_release_key('e')
     if time.time() - GameLoop.old_time > 12 and time.time() - GameLoop.old_time < 18:
         Actions.press_and_release_key('b')
     
-    elif time.time() - GameLoop.old_time > 18:
+    elif time.time() - GameLoop.old_time > 20:
         if gs['players'][gs['attach_target']]['alive']:
             target = gs['attach_target']
             msg = ''
@@ -81,8 +84,6 @@ def flee_back(gs, changes, gameState, l):
             Actions.switch_champions(msg)
             game_state.set_attach_target(target)     
             return 'play'
-    else:
-         Actions.press_and_release_key('e')
         
 def init_nexus_pos(gs, changes, gameState, l):
         if UtilityFuncs.dom_color(gameState.img.getpixel(graphics_pos['minimap']['top_nexus'])) == 'b':
