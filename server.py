@@ -62,6 +62,7 @@ class KeyToggleGroup:
         return key_str in self.keys
 
 def flee_back(gs, changes, gameState, l):
+    print(time.time() - GameLoop.old_time)
     if time.time() - GameLoop.old_time > 12:
         Actions.press_and_release_key('b')
     
@@ -109,7 +110,6 @@ def auto_heal(gs, changes, gameState, l):
 
 def listen_attached_player_death(gs, changes, gameState, l):
     if gs['attach_target'] is not '':
-        print(changes)
         if gs['is_attached'] is False and gs['players'][gs['attach_target']]['alive'] is False and changes['is_attached'] is True and changes['players'][gs['attach_target']]['alive'] is True:
             Actions.move_click(gameState.nexus_pos)
             GameLoop.old_time = time.time()
