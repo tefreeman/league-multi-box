@@ -66,7 +66,7 @@ def flee_back(gs, changes, gameState, l):
         Actions.press_and_release_key('b')
     
     elif time.time() - GameLoop.old_time > 18:
-        if gs['players'][gs['attach_target']]['is_alive']:
+        if gs['players'][gs['attach_target']]['alive']:
             target = gs['attach_target']
             msg = ''
             if target == 'top':
@@ -109,7 +109,7 @@ def auto_heal(gs, changes, gameState, l):
 
 def listen_attached_player_death(gs, changes, gameState, l):
     if gs['attach_target'] is not '':
-        if gs['is_attached'] is False and gs['players'][gs['attach_target']]['is_alive'] is False and changes['is_attached'] is True and changes['players'][gs['attach_target']]['is_alive'] is True:
+        if gs['is_attached'] is False and gs['players'][gs['attach_target']]['alive'] is False and changes['is_attached'] is True and changes['players'][gs['attach_target']]['alive'] is True:
             Actions.move_click(gameState.nexus_pos)
             GameLoop.old_time = time.time()
             return 'flee'
