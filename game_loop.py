@@ -38,10 +38,9 @@ class GameLoop:
     @staticmethod
     def run_commands(GameState):
         print(GameLoop.state)
-        
+        gs = GameState.to_dict()
         if len(GameLoop.state) > 0:
             if GameLoop.old_gs is not None:
-                gs = GameState.to_dict()
                 changes = UtilityFuncs.get_dict_differences(gs, GameLoop.old_gs)
                 l = len(GameLoop.commands[GameLoop.state])
                 for i in range(0, l):
