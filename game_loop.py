@@ -31,8 +31,7 @@ class GameLoop:
             
         if state not in GameLoop.listeners:
             GameLoop.listeners[state]= []
-            
-        GameLoop.listeners[state].append((func,))         
+                   
         GameLoop.commands[state].append(func)
 
     @staticmethod
