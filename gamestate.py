@@ -16,10 +16,12 @@ class GameState:
             'mid': Player('mid'),
             'adc': Player('adc')
         }
-        
+        self.nexus_pos = None
         self._is_attached = False
         self.attach_target = ''
         self.auto_heal_enabled = False
+        self.game_started = False
+        self._is_moving = False
     
     def to_dict(self):
         return {
@@ -31,23 +33,14 @@ class GameState:
             },
             'is_attached': self._is_attached,
             'attach_target': self.attach_target,
-            'auto_heal_enabled': self.auto_heal_enabled
+            'auto_heal_enabled': self.auto_heal_enabled,
+            'is_moving': self._is_moving
         }
-    
-   
-                
-    
-    def u_yummi_retreat(self):
-        if UtilityFuncs.dom_color(self.img.getpixel(graphics_pos['minimap']['top_nexus'])) == 'b':
-            if self._is_attached is False and self.players[self.attach_target].is_alive() is False:
-                Actions.move_click(graphics_pos['minimap']['top_nexus'])
-        elif UtilityFuncs.dom_color(self.img.getpixel(graphics_pos['minimap']['bottom_nexus'])) == 'b':
-             if self._is_attached is False and self.players[self.attach_target].is_alive() is False:
-                Actions.move_click(graphics_pos['minimap']['top_nexus'])
-    
             
     def set_attach_target(self, pos_str):
         self.attach_target = pos_str
+        self.set_is_moving(True)
+    
     
     def get_player(self, pos_str):
         return self.players[pos_str]
@@ -59,13 +52,25 @@ class GameState:
         self.img = screen_img
         self.u_players_hp()
         self.u_yummi_attached()
-        GameLoop.run_commands(self.to_dict())
+        self.u_is_moving()
+        GameLoop.run_commands(self)
         
         
     def test_update(self):
         im = Image.open("C:/Users/Trevor/Documents/pics/yummi_not_attached.png")
         self.update(im)
     
+    def u_is_moving(self):
+        if self._is_moving is True:
+            if self.players[self.attach_target].is_alive() is False:
+                self._is_moving is False
+            
+            if self._is_attached is True:
+                 self._is_moving is False
+            
+    def set_is_moving(self, val):
+        self._is_moving = val
+
     def u_yummi_attached(self):
         #print(self.img.getpixel((900, 357)))
         #print(self.img.getpixel((891, 355)))
@@ -80,6 +85,8 @@ class GameState:
         
         if connected and connected_2:
             self._is_attached = True
+            # set game to start
+            self.game_started = True
         else:
             self._is_attached = False
             

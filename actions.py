@@ -19,6 +19,7 @@ class Actions:
         mouse.move(mov_coords[0], mov_coords[1])
         time.sleep(0.03)
         mouse.click()
+    
         
     @staticmethod
     def switch_champions(key: str):

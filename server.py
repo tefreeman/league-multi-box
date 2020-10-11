@@ -6,8 +6,8 @@ from actions import Actions
 from screen_reader import ScreenReader
 from gamestate import GameState
 from game_loop import GameLoop
-
-
+from utility import UtilityFuncs
+from graphics_pos import graphics_pos
 def pressAndRelease(key_str: str):
     keyboard.press_and_release(key_str)
 
@@ -60,10 +60,41 @@ class KeyToggleGroup:
                 
     def has_key(self, key_str: str):
         return key_str in self.keys
+
+def flee_back(gs, changes, gameState, l):
+    if time.time() - GameLoop.old_time > 12:
+        Actions.press_and_release_key('b')
     
+    elif time.time() - GameLoop.old_time > 18:
+        if gs['players'][gs['attach_target']]['is_alive']:
+            target = gs['attach_target']
+            msg = ''
+            if target == 'top':
+                msg = 'f1'
+            if target == 'jg':
+                msg = 'f2'
+            if target == 'mid':
+                msg = 'f3'
+            if target == 'adc':
+                msg = 'f4'
+            Actions.switch_champions(msg)
+            game_state.set_attach_target(target)     
+            return 'play'
+    else:
+         Actions.press_and_release_key('e')
+        
+def init_nexus_pos(gs, changes, gameState, l):
+        if UtilityFuncs.dom_color(gameState.img.getpixel(graphics_pos['minimap']['top_nexus'])) == 'b':
+            gameState.nexus_pos = graphics_pos['minimap']['top_nexus']
+            return 'play'
+        elif UtilityFuncs.dom_color(gameState.img.getpixel(graphics_pos['minimap']['bottom_nexus'])) == 'b':
+             gameState.nexus_pos = graphics_pos['minimap']['bottom_nexus']
+             return 'play'
+        else:
+            return False
 
     
-def auto_heal(gs, changes):
+def auto_heal(gs, changes, gameState, l):
     #print( self._is_attached, ' ', self.attach_target, ' ', self.auto_heal_enabled )
     if gs['is_attached'] is True and gs['attach_target'] is not '' and gs['auto_heal_enabled'] is True:
         print('auto heal firing')
@@ -71,19 +102,34 @@ def auto_heal(gs, changes):
             print('heal cast')
             Actions.press_and_release_key('e')
             
-        if gs['players'][gs['attach_target']]['hp'] < 0.15:
+        if gs['players'][gs['attach_target']]['hp'] < 0.18:
             print('summoenr heal')
             Actions.press_and_release_key('d')
             
 
+def listen_attached_player_death(gs, changes, gameState, l):
+    if gs['is_attached'] is False and gs['players'][gs['attach_target']]['is_alive'] is False and changes['is_attached'] is True and changes['players'][gs['attach_target']]['is_alive'] is True:
+        Actions.move_click(gameState.nexus_pos)
+        GameLoop.old_time = time.time()
+        return 'flee'
+    
+def listen_player_attach_changes(gs, changes, gameState, l):
+    if changes['attach_target'] is True:
+        return 'play'
+    
 HOST = '192.168.1.10'  # 192.168.1.10
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 MOUSE_STATE = False
 CENTER_POS = (960,540)
 AUTO_HEAL_STATE = False
 game_state = GameState()
-GameLoop.add_command(auto_heal)
 
+GameLoop.add_init_commands(init_nexus_pos)
+GameLoop.add_command(auto_heal, 'play')
+GameLoop.add_command(flee_back, 'flee')
+
+GameLoop.add_listener(listen_attached_player_death, 'play')
+GameLoop.add_listener(listen_player_attach_changes, 'flee')
 print('added auto heal')
    
 screen_reader = ScreenReader(game_state)
