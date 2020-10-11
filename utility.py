@@ -86,9 +86,3 @@ class UtilityFuncs:
                 r = r[key]
 
 
-d1 = {'players': {'mid': {'age': 18, 'name': 'trevor'}, 'top': {'age': 19, 'name': 'Tucker'}}}
-d2 = {'players': {'mid': {'age': 18, 'name': 'trevor'}, 'top': {'age': 19, 'name': 'Tucker'}}}
-
-diff = UtilityFuncs.get_dict_differences(d1, d2)
-
-print(diff)
