@@ -65,7 +65,7 @@ class KeyToggleGroup:
     
 def auto_heal(gs, changes):
     #print( self._is_attached, ' ', self.attach_target, ' ', self.auto_heal_enabled )
-    if gs['is_attached'] is True and gs['attach_target'] is not '' and gs['auto_heal_enabled is True']:
+    if gs['is_attached'] is True and gs['attach_target'] is not '' and gs['auto_heal_enabled'] is True:
         print('auto heal firing')
         if gs['players'][gs['attach_target']].get_hp() < 0.60:
             print('heal cast')
