@@ -4,8 +4,8 @@ from screen_reader import ScreenReader
 from PIL import Image
 from actions import Actions
 from utility import UtilityFuncs
+from game_loop import GameLoop
 
-        
 class GameState:
     def __init__(self):
 
@@ -21,19 +21,32 @@ class GameState:
         self.attach_target = ''
         self.auto_heal_enabled = False
     
-    def auto_heal(self):
-        #print( self._is_attached, ' ', self.attach_target, ' ', self.auto_heal_enabled )
-        if self._is_attached is True and self.attach_target is not '' and self.auto_heal_enabled is True:
-            print('auto heal firing')
-            if self.players[self.attach_target].get_hp() < 0.60:
-                print('heal cast')
-                Actions.press_and_release_key('e')
+    def to_dict(self):
+        return {
+            'img': self.img,
+            'players': {
+                'top': self.players['top'].to_dict(),
+                'jg': self.players['jg'].to_dict(),
+                'mid': self.players['mid'].to_dict(),
+                'adc':self.players['adc'].to_dict(),
+            },
+            'is_attached': self._is_attached,
+            'attach_target': self.attach_target,
+            'auto_heal_enabled': self.auto_heal_enabled
+        }
+    
+   
                 
-            if self.players[self.attach_target].get_hp() < 0.15:
-                print('summoenr heal')
-                Actions.press_and_release_key('d')
-                
-                
+    
+    def u_yummi_retreat(self):
+        if UtilityFuncs.dom_color(self.img.getpixel(graphics_pos['minimap']['top_nexus'])) == 'b':
+            if self._is_attached is False and self.players[self.attach_target].is_alive() is False:
+                Actions.move_click(graphics_pos['minimap']['top_nexus'])
+        elif UtilityFuncs.dom_color(self.img.getpixel(graphics_pos['minimap']['bottom_nexus'])) == 'b':
+             if self._is_attached is False and self.players[self.attach_target].is_alive() is False:
+                Actions.move_click(graphics_pos['minimap']['top_nexus'])
+    
+            
     def set_attach_target(self, pos_str):
         self.attach_target = pos_str
     
@@ -45,9 +58,9 @@ class GameState:
         
     def update(self, screen_img):
         self.img = screen_img
-        self.u_player_hp()
+        self.u_players_hp()
         self.u_yummi_attached()
-        self.auto_heal()
+        GameLoop.run_commands(self.to_dict())
         
         
     def test_update(self):
@@ -72,11 +85,11 @@ class GameState:
             self._is_attached = False
             
             
-    def u_player_hp(self):
+    def u_players_hp(self):
         for player in self.players.values():
             start_x = player.hp_bar_start_x
-            y = graphics_pos['hp_bars_left']['y']
-            width = graphics_pos['hp_bars_left']['x-width']
+            y = graphics_pos['player_bars_left']['hp-y']
+            width = graphics_pos['player_bars_left']['x-width']
             
             black_pixel_count = 0
             red_pixel_count = 0
@@ -94,3 +107,6 @@ class GameState:
                 hp = 0
             
             player.set_hp(hp) 
+    
+    def u_player_mana(self):
+        pass

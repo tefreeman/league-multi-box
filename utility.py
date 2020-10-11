@@ -1,3 +1,5 @@
+from typing import Dict, Set
+
 class UtilityFuncs:
     
     @staticmethod
@@ -10,3 +12,75 @@ class UtilityFuncs:
             return False
     
         return True
+    
+    @staticmethod
+    def dom_color(rgb):
+        if rgb[0] > rgb[1] and rgb[0] > rgb[2]:
+            return 'r'
+        elif rgb[1] > rgb[0] and rgb[1] > rgb[2]:
+            return 'g'
+        elif rgb[2] > rgb[0] and rgb[2] > rgb[1]:
+            return 'b'
+        else:
+            return 's'
+        
+    
+    @staticmethod
+    def get_dict_differences(d, o):
+        diff = {}
+        keys: Set = UtilityFuncs.dict_keys_to_set(d)
+        
+        for key in keys:
+            v1 = UtilityFuncs._read_dict(d, key)
+            v2 = UtilityFuncs._read_dict(o, key)
+            
+            if v1 == v2:
+                UtilityFuncs._build_dict(diff, key, False)
+            else:
+                UtilityFuncs._build_dict(diff, key, True)
+        return diff
+   
+    @staticmethod
+    def dict_keys_to_set(d: Dict):
+        keys = set()
+        UtilityFuncs._inner_dict_keys_to_set(d, keys, "")
+        return keys
+      
+    
+    @staticmethod
+    def _inner_dict_keys_to_set(d: Dict, keys: Set, i: str = ""):
+        for k, v in d.items():
+            if isinstance(v, dict):
+                if len(i) > 0:
+                    i += "." + k
+                else:
+                    i += k
+                UtilityFuncs._inner_dict_keys_to_set(v, keys, i)
+            else:
+                n = i
+                if len(n) > 0:
+                    n += "." + k
+                else:
+                    n += k
+                keys.add(n)
+    
+    @staticmethod
+    def _read_dict(d: Dict, k: str):
+        k_arr = k.split('.')
+        r = d
+        for key in k_arr:
+            r = r[key]
+        return r
+    
+    @staticmethod
+    def _build_dict(d: Dict, k: str, v):
+        k_arr = k.split('.')
+        r = d
+        for i in range(0, len(k_arr)):
+            key = k_arr[i]
+            if i == len(k_arr) - 1:
+                r[key] = v
+            else:
+                if key not in d:
+                    r[key] = {}
+                r = r[key]

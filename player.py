@@ -5,14 +5,22 @@ from graphics_pos import graphics_pos
 class Player:
     def __init__(self, lane_str: str):
         self._lane = lane_str
-        self.hp_bar_start_x = graphics_pos['hp_bars_left']['x-lanes'][lane_str]
-        
+        self.hp_bar_start_x = graphics_pos['player_bars_left']['x-lanes'][lane_str] 
         self._hp = 1
         self._mana = 1
         self._cd_reduction = 1
         
         self._alive = True
     
+    def to_dict(self):
+        return {
+            'lane': self._lane,
+            'hp': self._hp,
+            'mana': self._mana,
+            'cd': self._cd_reduction,
+            'alive': self._alive
+        }
+        
     def get_lane(self):
         return self._lane
     

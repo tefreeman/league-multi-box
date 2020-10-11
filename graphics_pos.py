@@ -1,6 +1,7 @@
 graphics_pos = {
-    'hp_bars_left': {
-        'y': 747,
+    'player_bars_left': {
+        'hp-y': 747,
+        'mana-y': 757,
         'x-width': 52,
         'x-lanes': {
             'top': 12,
@@ -13,5 +14,18 @@ graphics_pos = {
         'x': 918,
         'y': 364,
         'width': 100
+        
+    },
+    
+    'user_mana_bar': (753, 1063, 1060-753),
+    
+    'level_text': {
+        'upper_left': (702, 1053),
+        'lower right': (742, 1065)
+    },
+    'minimap': {
+        'top_nexus': (270, 811),
+        'bottom_nexus': (43, 1035) 
     }
+
 }

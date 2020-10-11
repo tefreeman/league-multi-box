@@ -12,6 +12,13 @@ class Actions:
     @staticmethod
     def press_and_release_key(key: str):
         keyboard.press_and_release(key)
+     
+     
+    @staticmethod
+    def move_click(mov_coords):
+        mouse.move(mov_coords[0], mov_coords[1])
+        time.sleep(0.03)
+        mouse.click()
         
     @staticmethod
     def switch_champions(key: str):
