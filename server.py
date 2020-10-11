@@ -76,7 +76,7 @@ def auto_heal(gs, changes):
             Actions.press_and_release_key('d')
             
 
-HOST = '127.0.0.1'  # 192.168.1.10
+HOST = '192.168.1.10'  # 192.168.1.10
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 MOUSE_STATE = False
 CENTER_POS = (960,540)
