@@ -9,7 +9,7 @@ class GameLoop:
         'init': []
     }
     
-    listeners: {}
+    listeners = {}
     
     old_gs = None
     
