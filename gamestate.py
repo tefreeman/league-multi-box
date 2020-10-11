@@ -41,7 +41,6 @@ class GameState:
         self.attach_target = pos_str
         self.set_is_moving(True)
     
-    
     def get_player(self, pos_str):
         return self.players[pos_str]
     

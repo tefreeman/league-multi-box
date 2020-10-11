@@ -81,6 +81,14 @@ class UtilityFuncs:
             if i == len(k_arr) - 1:
                 r[key] = v
             else:
-                if key not in d:
+                if key not in r:
                     r[key] = {}
                 r = r[key]
+
+
+d1 = {'players': {'mid': {'age': 18, 'name': 'trevor'}, 'top': {'age': 19, 'name': 'Tucker'}}}
+d2 = {'players': {'mid': {'age': 18, 'name': 'trevor'}, 'top': {'age': 19, 'name': 'Tucker'}}}
+
+diff = UtilityFuncs.get_dict_differences(d1, d2)
+
+print(diff)
