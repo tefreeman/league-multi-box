@@ -14,11 +14,21 @@ class Actions:
     def mouse_mov(x, y):
         if Actions.mouse_lock is False:
             mouse.move(x, y)
+    
     @staticmethod
     def press_and_release_key(key: str):
         keyboard.press_and_release(key)
      
-     
+   
+    @staticmethod
+    def cast_on_self(slot: str):
+        Actions.mouse_lock = True
+        mouse.move(Actions.CENTER_POS[0], Actions.CENTER_POS[1] - 50)
+        time.sleep(0.03)
+        Actions.press_and_release_key(slot)
+        time.sleep(0.01)
+        Actions.mouse_lock = False
+        
     @staticmethod
     def move_click(mov_coords):
         Actions.mouse_lock = True
