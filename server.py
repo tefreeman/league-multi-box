@@ -211,7 +211,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                         if msg == 't':
                             MOUSE_STATE = not MOUSE_STATE
                         elif msg == 'c':
-                            mouse.move(CENTER_POS[0], CENTER_POS[1])
+                            Actions.mouse_mov(CENTER_POS[0], CENTER_POS[1])
                             MOUSE_STATE = False
                     
                     elif eve == 'ah':

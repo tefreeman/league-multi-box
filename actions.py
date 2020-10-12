@@ -6,9 +6,14 @@ import time
 
 class Actions:
     CENTER_POS = (960,540)
+    mouse_lock = False
     def __init__(self):
         pass
     
+    @staticmethod
+    def mouse_mov(x, y):
+        if Actions.mouse_lock is False:
+            mouse.move(x, y)
     @staticmethod
     def press_and_release_key(key: str):
         keyboard.press_and_release(key)
@@ -16,6 +21,7 @@ class Actions:
      
     @staticmethod
     def move_click(mov_coords):
+        Actions.mouse_lock = True
         mouse.move(mov_coords[0], mov_coords[1])
         time.sleep(0.05)
         mouse.click(button='right')
@@ -25,6 +31,7 @@ class Actions:
         mouse.move(mov_coords[0], mov_coords[1])
         time.sleep(0.03)
         mouse.click(button='right')
+        Actions.mouse_lock = False
         
     @staticmethod
     def switch_champions(key: str):
@@ -47,3 +54,15 @@ class Actions:
         mouse.click(button='left')
         time.sleep(0.25)
         Actions.press_and_release_key('w')
+
+
+def _move_click(mov_coords):
+    mouse.move(mov_coords[0], mov_coords[1])
+    time.sleep(0.05)
+    mouse.click(button='right')
+    mouse.move(mov_coords[0], mov_coords[1])
+    time.sleep(0.01)
+    mouse.click(button='right')
+    mouse.move(mov_coords[0], mov_coords[1])
+    time.sleep(0.03)
+    mouse.click(button='right')
