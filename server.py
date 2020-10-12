@@ -111,6 +111,8 @@ def auto_heal(gs, changes, gameState, l):
 
 def listen_attached_player_death(gs, changes, gameState, l):
     if gs['attach_target'] is not '':
+        p_alive = gs['players'][gs['attach_target']]['alive']
+        p_changes_alive = changes['players'][gs['attach_target']]['alive']
         if gs['is_attached'] is False and gs['players'][gs['attach_target']]['alive'] is False and changes['is_attached'] is True and changes['players'][gs['attach_target']]['alive'] is True:
             Actions.move_click(gameState.nexus_pos)
             GameLoop.old_time = time.time()
@@ -179,7 +181,10 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                         break
                     
                     if eve == 'pr':
-                        pressAndRelease(msg)
+                        if msg == '2' or msg == '1':
+                            Actions.cast_on_self(msg)
+                        else:         
+                            pressAndRelease(msg)
                    
                     elif eve == 'c':
                         Actions.switch_champions(msg)
