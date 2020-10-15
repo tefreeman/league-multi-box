@@ -31,7 +31,7 @@ class Actions:
     
     @staticmethod    
     def cast_on_self(slot: str):
-        t = threading.Thread(target=Actions._cast_on_self, args=(slot))
+        t = threading.Thread(target=Actions._cast_on_self, args=(slot,))
         t.start()
         t.join(0.15)
     
@@ -51,7 +51,7 @@ class Actions:
     
     @staticmethod
     def move_click(mov_coords):
-        t = threading.Thread(target=Actions._move_click, args=(mov_coords))
+        t = threading.Thread(target=Actions._move_click, args=mov_coords)
         t.start()
         t.join(0.15)
     
@@ -76,7 +76,7 @@ class Actions:
     def switch_champions(key: str):
         t = threading.Thread(target=Actions._switch_champions, args=(key,))
         t.start()
-        t.join(1)
+        t.join(1.0)
         
         
     @staticmethod
