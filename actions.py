@@ -75,7 +75,7 @@ class Actions:
     
     @staticmethod
     def switch_champions(key: str):
-        t = threading.Thread(target=Actions._switch_champions, args=(key))
+        t = threading.Thread(target=Actions._switch_champions, args=key)
         t.start()
         t.join(1)
         
