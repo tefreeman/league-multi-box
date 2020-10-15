@@ -2,7 +2,7 @@ import configparser
 import mouse
 import keyboard
 import time
-
+import threading
 
 class Actions:
     CENTER_POS = (960,540)
@@ -21,13 +21,19 @@ class Actions:
      
    
     @staticmethod
-    def cast_on_self(slot: str):
+    def _cast_on_self(slot: str):
         Actions.mouse_lock = True
         mouse.move(Actions.CENTER_POS[0], Actions.CENTER_POS[1] - 50)
-        time.sleep(0.03)
+        time.sleep(3)
         Actions.press_and_release_key(slot)
-        time.sleep(0.01)
+        time.sleep(1)
         Actions.mouse_lock = False
+    
+    @staticmethod    
+    def cast_on_self(slot: str):
+        t = threading.Thread(target=Actions._cast_on_self, args=(slot))
+        t.start()
+        t.join()
         
     @staticmethod
     def move_click(mov_coords):
