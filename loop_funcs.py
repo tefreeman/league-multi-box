@@ -13,7 +13,7 @@ def flee_back(gs, changes, gameState, l):
     if time.time() - GameLoop.old_time > 12 and time.time() - GameLoop.old_time < 18:
         Actions.press_and_release_key('b')
     
-    elif time.time() - GameLoop.old_time > 20:
+    elif time.time() - GameLoop.old_time > 24:
         if gs['players'][gs['attach_target']]['alive']:
             target = gs['attach_target']
             msg = ''
@@ -38,8 +38,7 @@ def init_nexus_pos(gs, changes, gameState, l):
              return 'play'
         else:
             return False
-
-    
+   
 def auto_heal(gs, changes, gameState, l):
     #print( self._is_attached, ' ', self.attach_target, ' ', self.auto_heal_enabled )
     if gs['is_attached'] is True and gs['attach_target'] is not '' and gs['auto_heal_enabled'] is True:
@@ -49,7 +48,6 @@ def auto_heal(gs, changes, gameState, l):
             
         if gs['players'][gs['attach_target']]['hp'] < 0.18:
             Actions.press_and_release_key('d')
-
 
 def level_up(gs, changes, gameState, l):
     if gs['can_learn_spell'] is True:
