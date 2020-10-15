@@ -77,6 +77,7 @@ class UtilityFuncs:
             r_arr = []
             for o in d:
                 r_arr.append(UtilityFuncs._read_dict(o, k))
+            return r_arr
     
     @staticmethod
     def _build_dict(d: Dict, k: str, v):
