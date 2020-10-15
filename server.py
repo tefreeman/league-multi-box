@@ -113,7 +113,7 @@ def listen_attached_player_death(gs, changes, gameState, l):
     if gs['attach_target'] is not '':
         p_alive = gs['players'][gs['attach_target']]['alive']
         p_changes_alive = changes['players'][gs['attach_target']]['alive']
-        if gs['is_attached'] is False and gs['players'][gs['attach_target']]['alive'] is False and changes['is_attached'] is True and changes['players'][gs['attach_target']]['alive'] is True:
+        if gs['is_attached'] is False and p_alive is False and changes['is_attached'] is True and p_changes_alive is True:
             Actions.move_click(gameState.nexus_pos)
             GameLoop.old_time = time.time()
             return 'flee'

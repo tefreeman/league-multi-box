@@ -2,7 +2,7 @@ from utility import UtilityFuncs
 from actions import Actions
 
 class GameLoop:
-    
+    MAX_OLD_GS = 3
     old_time = 0
     state = ''
     commands = {
@@ -11,7 +11,7 @@ class GameLoop:
     
     listeners = {}
     
-    old_gs = None
+    old_gs = []
     
     def __init__(self):
         pass
@@ -39,7 +39,7 @@ class GameLoop:
         print(GameLoop.state)
         gs = GameState.to_dict()
         if len(GameLoop.state) > 0:
-            if GameLoop.old_gs is not None:
+            if len(GameLoop.old_gs) > 0:
                 changes = UtilityFuncs.get_dict_differences(gs, GameLoop.old_gs)
                 l = len(GameLoop.commands[GameLoop.state])
                 for i in range(0, l):
@@ -61,7 +61,9 @@ class GameLoop:
         else:
             if GameState.game_started is True:
                 GameLoop.state = 'init'
-        GameLoop.old_gs = gs
+        if len(GameLoop.old_gs) > GameLoop.MAX_OLD_GS:
+            GameLoop.old_gs.pop(0)
+        GameLoop.old_gs.append(gs)
         
     
     

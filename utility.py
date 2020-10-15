@@ -32,12 +32,13 @@ class UtilityFuncs:
         
         for key in keys:
             v1 = UtilityFuncs._read_dict(d, key)
-            v2 = UtilityFuncs._read_dict(o, key)
+            v2_arr = UtilityFuncs._read_dict(o, key)
             
-            if v1 == v2:
-                UtilityFuncs._build_dict(diff, key, False)
-            else:
-                UtilityFuncs._build_dict(diff, key, True)
+            is_changed = False
+            for v2 in v2_arr:
+                if v1 != v2:
+                    is_changed = True
+            UtilityFuncs._build_dict(diff, key, is_changed)
         return diff
    
     @staticmethod
@@ -65,12 +66,17 @@ class UtilityFuncs:
                 keys.add(n)
     
     @staticmethod
-    def _read_dict(d: Dict, k: str):
-        k_arr = k.split('.')
-        r = d
-        for key in k_arr:
-            r = r[key]
-        return r
+    def _read_dict(d, k: str):
+        if isinstance(d, dict):
+            k_arr = k.split('.')
+            r = d
+            for key in k_arr:
+                r = r[key]
+            return r
+        elif isinstance(d, list):
+            r_arr = []
+            for o in d:
+                r_arr.append(UtilityFuncs._read_dict(o, k))
     
     @staticmethod
     def _build_dict(d: Dict, k: str, v):
