@@ -56,7 +56,7 @@ class Actions:
         t.join(0.15)
         
     @staticmethod
-    def _switch_champions(key: str):
+    def _switch_champions(key: str, blah):
         Actions.mouse_lock = True
         mouse.move(60, 980)
         time.sleep(0.03)
@@ -72,9 +72,9 @@ class Actions:
     
     @staticmethod
     def switch_champions(key: str):
-        t = threading.Thread(target=Actions._switch_champions, args=key)
+        t = threading.Thread(target=Actions._switch_champions, args=(key))
         t.start()
-        t.join()
+        t.join(1)
         
         
     @staticmethod
