@@ -57,8 +57,8 @@ class Actions:
     
     #TODO FIGURE OUT WHY BLAH IS NEEDED
     @staticmethod
-    def _switch_champions(key1: str, key2):
-        key = key1+key2
+    def _switch_champions(key: str):
+        print(key)
         Actions.mouse_lock = True
         mouse.move(60, 980)
         time.sleep(0.03)
@@ -74,7 +74,7 @@ class Actions:
     
     @staticmethod
     def switch_champions(key: str):
-        t = threading.Thread(target=Actions._switch_champions, args=key)
+        t = threading.Thread(target=Actions._switch_champions, args=(key,))
         t.start()
         t.join(1)
         
