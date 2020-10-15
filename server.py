@@ -121,6 +121,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                     
             else:
                 print('break3')
+                print(data_stream)
                 break
             
     

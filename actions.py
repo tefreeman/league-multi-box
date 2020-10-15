@@ -26,7 +26,7 @@ class Actions:
         mouse.move(Actions.CENTER_POS[0], Actions.CENTER_POS[1] - 50)
         time.sleep(3)
         Actions.press_and_release_key(slot)
-        time.sleep(1)
+        time.sleep(1)`@`
         Actions.mouse_lock = False
     
     @staticmethod    
