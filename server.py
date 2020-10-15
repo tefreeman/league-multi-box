@@ -101,11 +101,9 @@ def auto_heal(gs, changes, gameState, l):
     if gs['is_attached'] is True and gs['attach_target'] is not '' and gs['auto_heal_enabled'] is True:
         print('auto heal firing')
         if gs['players'][gs['attach_target']]['hp'] < 0.60:
-            print('heal cast')
             Actions.press_and_release_key('e')
             
         if gs['players'][gs['attach_target']]['hp'] < 0.18:
-            print('summoenr heal')
             Actions.press_and_release_key('d')
 
 
