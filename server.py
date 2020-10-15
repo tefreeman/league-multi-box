@@ -58,6 +58,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             
             
             if data_stream[0] == '~' and data_stream[-1:] == '~':
+                print(Actions.mouse_lock)
                 commands = data_stream.split('~')
                 for command_str in commands:
                     
