@@ -36,6 +36,7 @@ class GameLoop:
 
     @staticmethod
     def run_commands(GameState):
+        print(len(GameLoop.old_gs))
         #print(GameLoop.state)
         gs = GameState.to_dict()
         if len(GameLoop.state) > 0:
