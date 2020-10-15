@@ -22,7 +22,7 @@ class GameState:
         self.auto_heal_enabled = False
         self.game_started = False
         self._is_moving = False
-    
+        self._can_learn_spell = False
     def to_dict(self):
         return {
             'players': {
@@ -34,7 +34,8 @@ class GameState:
             'is_attached': self._is_attached,
             'attach_target': self.attach_target,
             'auto_heal_enabled': self.auto_heal_enabled,
-            'is_moving': self._is_moving
+            'is_moving': self._is_moving,
+            'can_learn_spell': self._can_learn_spell
         }
             
     def set_attach_target(self, pos_str):
@@ -52,9 +53,22 @@ class GameState:
         self.u_players_hp()
         self.u_yummi_attached()
         self.u_is_moving()
+        self.u_can_learn_spell()
         GameLoop.run_commands(self)
         
-        
+    
+    def u_can_learn_spell(self):
+        if UtilityFuncs.fuzzy_color_match(self.img.getpixel((809,977)), (155, 116, 57)) is True:
+            self._can_learn_spell = True
+        elif UtilityFuncs.fuzzy_color_match(self.img.getpixel((858,977)), (155, 116, 57)) is True:
+            self._can_learn_spell = True
+        elif UtilityFuncs.fuzzy_color_match(self.img.getpixel((908,977)), (155, 116, 57)) is True:
+            self._can_learn_spell = True
+        elif UtilityFuncs.fuzzy_color_match(self.img.getpixel((957,977)), (155, 116, 57)) is True:
+           self._can_learn_spell = True   
+        else:
+           self._can_learn_spell = False
+           
     def test_update(self):
         im = Image.open("C:/Users/Trevor/Documents/pics/yummi_not_attached.png")
         self.update(im)

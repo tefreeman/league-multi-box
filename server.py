@@ -107,7 +107,17 @@ def auto_heal(gs, changes, gameState, l):
         if gs['players'][gs['attach_target']]['hp'] < 0.18:
             print('summoenr heal')
             Actions.press_and_release_key('d')
-            
+
+
+def level_up(gs, changes, gameState, l):
+    if gs['can_learn_spell'] is True:
+        Actions.press_and_release_key('ctrl+r')
+        time.sleep(0.01)
+        Actions.press_and_release_key('ctrl+e')
+        time.sleep(0.01)  
+        Actions.press_and_release_key('ctrl+w')
+        time.sleep(0.01)
+        Actions.press_and_release_key('ctrl+q')   
 
 def listen_attached_player_death(gs, changes, gameState, l):
     if gs['attach_target'] is not '':
@@ -121,7 +131,7 @@ def listen_attached_player_death(gs, changes, gameState, l):
 def listen_player_attach_changes(gs, changes, gameState, l):
     if changes['attach_target'] is True:
         return 'play'
-    
+
 HOST = '192.168.1.10'  # 192.168.1.10
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 MOUSE_STATE = False
@@ -131,6 +141,7 @@ game_state = GameState()
 
 GameLoop.add_command(init_nexus_pos, 'init')
 GameLoop.add_command(auto_heal, 'play')
+GameLoop.add_command(level_up, 'play')
 GameLoop.add_command(flee_back, 'flee')
 
 GameLoop.add_listener(listen_attached_player_death, 'play')
