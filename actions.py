@@ -33,7 +33,6 @@ class Actions:
     def cast_on_self(slot: str):
         t = threading.Thread(target=Actions._cast_on_self, args=(slot))
         t.start()
-        t.join()
         
     @staticmethod
     def move_click(mov_coords):
