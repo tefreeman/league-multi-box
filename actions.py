@@ -54,9 +54,12 @@ class Actions:
         t = threading.Thread(target=Actions._move_click, args=(mov_coords))
         t.start()
         t.join(0.15)
-        
+    
+    #TODO FIGURE OUT WHY BLAH IS NEEDED
     @staticmethod
     def _switch_champions(key: str, blah):
+        print(key)
+        print(blah)
         Actions.mouse_lock = True
         mouse.move(60, 980)
         time.sleep(0.03)
