@@ -58,7 +58,6 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             
             
             if data_stream[0] == '~' and data_stream[-1:] == '~':
-                print(Actions.mouse_lock)
                 commands = data_stream.split('~')
                 for command_str in commands:
                     
@@ -101,7 +100,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                         x, y = msg.split(',')
                         x = int(x)
                         y = int(y)
-                        mouse.move(x, y)
+                        Actions.mouse_mov(x, y)
                     
                     elif eve == 'mc':
                         if msg == 'left':
