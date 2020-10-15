@@ -57,9 +57,8 @@ class Actions:
     
     #TODO FIGURE OUT WHY BLAH IS NEEDED
     @staticmethod
-    def _switch_champions(key: str, blah):
-        print(key)
-        print(blah)
+    def _switch_champions(key1: str, key2):
+        key = key1+key2
         Actions.mouse_lock = True
         mouse.move(60, 980)
         time.sleep(0.03)
