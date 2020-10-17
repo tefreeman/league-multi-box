@@ -62,7 +62,7 @@ class GameState:
         self.u_can_learn_spell()
         self.u_player_pos()
         
-        #print(self._pos)
+        print(self._in_fountain)
         GameLoop.run_commands(self)
         
     def u_in_fountain(self):
