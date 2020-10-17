@@ -156,83 +156,83 @@ class GameState:
                 break
             x += box_size[0] - 10 
         
-        
-        n = white_pixel_loc[0]
-        m = white_pixel_loc[0]
-        
-        while True: 
-            x_pos_flag = False
-            x_neg_flag = False
+        if white_pixel_loc is not None:
+            n = white_pixel_loc[0]
+            m = white_pixel_loc[0]
             
-            if self.img.getpixel((n, white_pixel_loc[1]))[0] == 255 and self.img.getpixel((n, white_pixel_loc[1]))[1] == 255 and self.img.getpixel((n, white_pixel_loc[1]))[2] == 255:
-                x_values.append(n)
-                x_pos_flag = True
-            
-            if self.img.getpixel((n, white_pixel_loc[1]-1))[0] == 255 and self.img.getpixel((n, white_pixel_loc[1]-1))[1] == 255 and self.img.getpixel((n, white_pixel_loc[1]-1))[2] == 255:
-                x_values.append(n)
-                x_pos_flag = True
+            while True: 
+                x_pos_flag = False
+                x_neg_flag = False
                 
-            if self.img.getpixel((m, white_pixel_loc[1]))[0] == 255 and self.img.getpixel((m, white_pixel_loc[1]))[1] == 255 and self.img.getpixel((m, white_pixel_loc[1]))[2] == 255:
-                x_values.append(m)
-                x_neg_flag = True
-            
-            if self.img.getpixel((m, white_pixel_loc[1]-1))[0] == 255 and self.img.getpixel((m, white_pixel_loc[1]-1))[1] == 255 and self.img.getpixel((m, white_pixel_loc[1]-1))[2] == 255:
-                x_values.append(m)
-                x_neg_flag = True
+                if self.img.getpixel((n, white_pixel_loc[1]))[0] == 255 and self.img.getpixel((n, white_pixel_loc[1]))[1] == 255 and self.img.getpixel((n, white_pixel_loc[1]))[2] == 255:
+                    x_values.append(n)
+                    x_pos_flag = True
                 
-            if x_pos_flag is False and x_neg_flag is False:
-                break
-            
-            n += 1
-            m -= 1
-        
-        x_values.sort()
-        
-        L = x_values[0]
-        R = x_values[len(x_values) - 1]
-        
-        d = white_pixel_loc[1]
-
-        
-        while True:
-            y_left_flag = False
-            y_right_flag =False
-
-            if self.img.getpixel((L, d))[0] == 255 and self.img.getpixel((L, d))[1] == 255 and self.img.getpixel((L, d))[2] == 255:
-                y_values.append(d)
-                y_left_flag = True
-            
-            if self.img.getpixel((R, d))[0] == 255 and self.img.getpixel((R, d))[1] == 255 and self.img.getpixel((R, d))[2] == 255:
-                y_values.append(d)
-                y_right_flag = True
+                if self.img.getpixel((n, white_pixel_loc[1]-1))[0] == 255 and self.img.getpixel((n, white_pixel_loc[1]-1))[1] == 255 and self.img.getpixel((n, white_pixel_loc[1]-1))[2] == 255:
+                    x_values.append(n)
+                    x_pos_flag = True
+                    
+                if self.img.getpixel((m, white_pixel_loc[1]))[0] == 255 and self.img.getpixel((m, white_pixel_loc[1]))[1] == 255 and self.img.getpixel((m, white_pixel_loc[1]))[2] == 255:
+                    x_values.append(m)
+                    x_neg_flag = True
                 
-            if y_left_flag is False and y_right_flag is False: 
-                break
+                if self.img.getpixel((m, white_pixel_loc[1]-1))[0] == 255 and self.img.getpixel((m, white_pixel_loc[1]-1))[1] == 255 and self.img.getpixel((m, white_pixel_loc[1]-1))[2] == 255:
+                    x_values.append(m)
+                    x_neg_flag = True
+                    
+                if x_pos_flag is False and x_neg_flag is False:
+                    break
+                
+                n += 1
+                m -= 1
             
-            d -= 1
+            x_values.sort()
+            
+            L = x_values[0]
+            R = x_values[len(x_values) - 1]
+            
+            d = white_pixel_loc[1]
 
-        y_values.sort()
-        
-        bx = box_size[0] / 2
-        by = box_size[1] / 2
-        xl = len(x_values) - 1
-        yl = len(y_values) - 1
-        if white_pixel_loc[0] < minimap_ul[0] + box_size[0]:
-            # use right side
-            if white_pixel_loc[1] < minimap_ul[1] + box_size[1]:
-                #use lower right
-                self._pos =  (x_values[xl]- bx, y_values[yl] -by)
+            
+            while True:
+                y_left_flag = False
+                y_right_flag =False
+
+                if self.img.getpixel((L, d))[0] == 255 and self.img.getpixel((L, d))[1] == 255 and self.img.getpixel((L, d))[2] == 255:
+                    y_values.append(d)
+                    y_left_flag = True
+                
+                if self.img.getpixel((R, d))[0] == 255 and self.img.getpixel((R, d))[1] == 255 and self.img.getpixel((R, d))[2] == 255:
+                    y_values.append(d)
+                    y_right_flag = True
+                    
+                if y_left_flag is False and y_right_flag is False: 
+                    break
+                
+                d -= 1
+
+            y_values.sort()
+            
+            bx = box_size[0] / 2
+            by = box_size[1] / 2
+            xl = len(x_values) - 1
+            yl = len(y_values) - 1
+            if white_pixel_loc[0] < minimap_ul[0] + box_size[0]:
+                # use right side
+                if white_pixel_loc[1] < minimap_ul[1] + box_size[1]:
+                    #use lower right
+                    self._pos =  (x_values[xl]- bx, y_values[yl] -by)
+                else:
+                    #use upper right
+                    self._pos = (x_values[xl]- bx, y_values[0]+ by)
             else:
-                #use upper right
-                self._pos = (x_values[xl]- bx, y_values[0]+ by)
-        else:
-            #use left side
-            if white_pixel_loc[1] < minimap_ul[1] + box_size[1]:
-                #use lower left
-                self._pos = (x_values[0] + bx, y_values[yl] -by)
-            else:
-                #use upper left
-                self._pos = (x_values[0] + bx, y_values[0] + by)
+                #use left side
+                if white_pixel_loc[1] < minimap_ul[1] + box_size[1]:
+                    #use lower left
+                    self._pos = (x_values[0] + bx, y_values[yl] -by)
+                else:
+                    #use upper left
+                    self._pos = (x_values[0] + bx, y_values[0] + by)
             
         
 
