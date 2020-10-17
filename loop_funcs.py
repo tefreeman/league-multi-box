@@ -63,7 +63,6 @@ def level_up(gs, changes, gameState, l):
 
 def player_backed(gs, changes, gameState, l):
     if gs['in_fountain'] is True and gs['attach_target'] is not '' and gs['is_attached'] is False:
-        while True:
             time.sleep(5)
             if gs['players'][gs['attach_target']]['alive'] is True:
                 target = gs['attach_target']
@@ -77,8 +76,8 @@ def player_backed(gs, changes, gameState, l):
                 if target == 'adc':
                     msg = 'f4'
                 Actions.switch_champions(msg)
-                gameState.set_attach_target(target)   
-    
+                gameState.set_attach_target(target)
+                
 def listen_attached_player_death(gs, changes, gameState, l):
     if gs['attach_target'] is not '':
         p_alive = gs['players'][gs['attach_target']]['alive']

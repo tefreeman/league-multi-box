@@ -34,7 +34,7 @@ GameLoop.add_listener(loop_funcs.listen_player_attach_changes, 'flee')
 
 
 print('added auto heal')
-   
+started = False
 screen_reader = ScreenReader(game_state)
 screen_reader.daemon = True
 
@@ -77,7 +77,9 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                         break
                     
                     if eve == 'st':
-                        screen_reader.start()
+                        if started is False:
+                            screen_reader.start()
+                            started = True
                     
                     elif eve == 'pr':
                         if msg == '2' or msg == '1':
