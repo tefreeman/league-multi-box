@@ -35,6 +35,7 @@ TestSocket.connect()
 
 time.sleep(1)
 
+keyboard.add_hotkey('ctrl+s', TestSocket.mysend, args=['st', ''])
 
 keyboard.add_hotkey('shift+q', TestSocket.mysend, args=['pr', 'q'])
 keyboard.add_hotkey('shift+w', TestSocket.mysend, args=['pr','w'])

@@ -16,7 +16,7 @@ def pressAndRelease(key_str: str):
 
 
 
-HOST = '127.0.0.1'  # 192.168.1.10
+HOST = '192.168.1.10'  # 192.168.1.10
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 MOUSE_STATE = False
 CENTER_POS = (960,540)
@@ -27,6 +27,7 @@ GameLoop.add_command(loop_funcs.init_nexus_pos, 'init')
 GameLoop.add_command(loop_funcs.auto_heal, 'play')
 GameLoop.add_command(loop_funcs.level_up, 'play')
 GameLoop.add_command(loop_funcs.flee_back, 'flee')
+GameLoop.add_command(loop_funcs.player_backed, 'play')
 
 GameLoop.add_listener(loop_funcs.listen_attached_player_death, 'play')
 GameLoop.add_listener(loop_funcs.listen_player_attach_changes, 'flee')
@@ -36,7 +37,6 @@ print('added auto heal')
    
 screen_reader = ScreenReader(game_state)
 screen_reader.daemon = True
-screen_reader.start()
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, PORT))
@@ -76,7 +76,10 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                         print(command_str)
                         break
                     
-                    if eve == 'pr':
+                    if eve == 'st':
+                        screen_reader.start()
+                    
+                    elif eve == 'pr':
                         if msg == '2' or msg == '1':
                             Actions.cast_on_self(msg)
                         else:         

@@ -6,7 +6,6 @@ from graphics_pos import graphics_pos
 from game_state import GameState
 
 def flee_back(gs, changes, gameState, l):
-    print(time.time() - GameLoop.old_time)
     
     if time.time() - GameLoop.old_time < 11.5:
         Actions.press_and_release_key('e')
@@ -32,9 +31,11 @@ def flee_back(gs, changes, gameState, l):
 def init_nexus_pos(gs, changes, gameState, l):
         if UtilityFuncs.dom_color(gameState.img.getpixel(graphics_pos['minimap']['top_nexus'])) == 'b':
             gameState.nexus_pos = graphics_pos['minimap']['top_nexus']
+            gameState.fountain_pos = (290,788)
             return 'play'
         elif UtilityFuncs.dom_color(gameState.img.getpixel(graphics_pos['minimap']['bottom_nexus'])) == 'b':
              gameState.nexus_pos = graphics_pos['minimap']['bottom_nexus']
+             gameState.fountain_pos = (18.5,1052.0)
              return 'play'
         else:
             return False
@@ -59,6 +60,25 @@ def level_up(gs, changes, gameState, l):
         time.sleep(0.01)
         Actions.press_and_release_key('ctrl+q')   
 
+
+def player_backed(gs, changes, gameState, l):
+    if gs['in_fountain'] is True and gs['attach_target'] is not '' and gs['is_attached'] is False:
+        while True:
+            time.sleep(5)
+            if gs['players'][gs['attach_target']]['alive'] is True:
+                target = gs['attach_target']
+                msg = ''
+                if target == 'top':
+                    msg = 'f1'
+                if target == 'jg':
+                    msg = 'f2'
+                if target == 'mid':
+                    msg = 'f3'
+                if target == 'adc':
+                    msg = 'f4'
+                Actions.switch_champions(msg)
+                gameState.set_attach_target(target)   
+    
 def listen_attached_player_death(gs, changes, gameState, l):
     if gs['attach_target'] is not '':
         p_alive = gs['players'][gs['attach_target']]['alive']
@@ -71,3 +91,6 @@ def listen_attached_player_death(gs, changes, gameState, l):
 def listen_player_attach_changes(gs, changes, gameState, l):
     if changes['attach_target'] is True:
         return 'play'
+
+
+#18.5, 1052.0 blue side fountain

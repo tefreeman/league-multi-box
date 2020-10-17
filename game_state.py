@@ -5,7 +5,7 @@ from PIL import Image
 from actions import Actions
 from utility import UtilityFuncs
 from game_loop import GameLoop
-
+import math
 class GameState:
     def __init__(self):
 
@@ -17,13 +17,16 @@ class GameState:
             'adc': Player('adc')
         }
         self.nexus_pos = None
+        self.fountain_pos = None
         self._is_attached = False
         self.attach_target = ''
         self.auto_heal_enabled = False
         self.game_started = False
         self._is_moving = False
         self._can_learn_spell = False
-        self._pos = None
+        self._my_pos = None
+        self._in_fountain = False
+        
     def to_dict(self):
         return {
             'players': {
@@ -36,7 +39,9 @@ class GameState:
             'attach_target': self.attach_target,
             'auto_heal_enabled': self.auto_heal_enabled,
             'is_moving': self._is_moving,
-            'can_learn_spell': self._can_learn_spell
+            'can_learn_spell': self._can_learn_spell,
+            'my_pos': self._my_pos,
+            'in_fountain': self._in_fountain
         }
             
     def set_attach_target(self, pos_str):
@@ -57,10 +62,16 @@ class GameState:
         self.u_can_learn_spell()
         self.u_player_pos()
         
-        print(self._pos)
+        #print(self._pos)
         GameLoop.run_commands(self)
         
-    
+    def u_in_fountain(self):
+        if self.fountain_pos is not None and self._my_pos is not None:
+            if UtilityFuncs.dist(self._my_pos, self.fountain_pos) < 15.0:
+                self._in_fountain = True
+            else:
+                self._in_fountain = False
+                
     def u_can_learn_spell(self):
         if UtilityFuncs.fuzzy_color_match(self.img.getpixel((809,977)), (155, 116, 57)) is True:
             self._can_learn_spell = True
@@ -133,6 +144,7 @@ class GameState:
     
     def u_player_mana(self):
         pass
+    
     
     def u_player_pos(self):
         box_size = (81,46)
@@ -221,18 +233,18 @@ class GameState:
                 # use right side
                 if white_pixel_loc[1] < minimap_ul[1] + box_size[1]:
                     #use lower right
-                    self._pos =  (x_values[xl]- bx, y_values[yl] -by)
+                    self._my_pos =  (x_values[xl]- bx, y_values[yl] -by)
                 else:
                     #use upper right
-                    self._pos = (x_values[xl]- bx, y_values[0]+ by)
+                    self._my_pos = (x_values[xl]- bx, y_values[0]+ by)
             else:
                 #use left side
                 if white_pixel_loc[1] < minimap_ul[1] + box_size[1]:
                     #use lower left
-                    self._pos = (x_values[0] + bx, y_values[yl] -by)
+                    self._my_pos = (x_values[0] + bx, y_values[yl] -by)
                 else:
                     #use upper left
-                    self._pos = (x_values[0] + bx, y_values[0] + by)
+                    self._my_pos = (x_values[0] + bx, y_values[0] + by)
             
         
 
