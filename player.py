@@ -9,6 +9,8 @@ class Player:
         self._hp = 1
         self._mana = 1
         self._cd_reduction = 1
+        self._pos = None
+        
         
         self._alive = True
     
@@ -26,6 +28,12 @@ class Player:
     
     def set_lane(self, lane_str: str):
         self._lane = lane_str
+    
+    def set_pos(self, x, y):
+        self._pos = (x,y)
+        
+    def get_pos(self):
+        return self._pos
     
     def set_mana(self, val):
         self._mana = val
